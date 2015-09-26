@@ -3,6 +3,7 @@ package com.flammekastar.locationapp;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -22,11 +23,13 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -35,6 +38,7 @@ public class MapsActivity extends FragmentActivity implements View.OnClickListen
     public static final String PREFS_NAME = "MyPrefsFile";
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     private LocationManager locationManager;
+    private ArrayList<LatLng> coordlist = new ArrayList<>();
     Handler handler;
 
     public MapsActivity() {
@@ -110,7 +114,8 @@ public class MapsActivity extends FragmentActivity implements View.OnClickListen
         } catch (IOException ioException) {
             Log.e("shits","wrong");
         }
-
+        //Update the list of coords that has been recorded. Using the LatLng created earlier.
+        updateRunCoords(curloc);
     }
 
     @Override
@@ -132,14 +137,26 @@ public class MapsActivity extends FragmentActivity implements View.OnClickListen
                 Toast.LENGTH_SHORT).show();
     }
 
+    public void updateRunCoords(LatLng curloc) {;
+        coordlist.add(curloc);
+        mapMarkers();
+    }
+
+    public void mapMarkers() {
+        mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+        for (int a = 0; a < coordlist.size(); a++) {
+            mMap.addPolyline(new PolylineOptions().geodesic(true).addAll(coordlist).color(Color.rgb(0, 164, 143)));
+        }
+    }
+
     public void setMapFragment(LatLng cLoc){
         mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(cLoc, 17));
 
-        mMap.addMarker(new MarkerOptions()
-                .title("Location")
-                .snippet("You are here!")
-                .position(cLoc));
+        //mMap.addMarker(new MarkerOptions()
+          //      .title("Location")
+            //    .snippet("You are here!")
+              //  .position(cLoc));
     }
 
     private void updateWeatherData(final double lat, final double lng){
