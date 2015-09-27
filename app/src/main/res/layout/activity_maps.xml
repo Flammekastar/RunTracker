@@ -54,6 +54,15 @@
         android:id="@+id/timeText"
         android:layout_below="@+id/distanceText"
         android:layout_centerHorizontal="true" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stopp"
+        android:id="@+id/button2"
+        android:textColor="@color/darkgreen"
+        android:layout_below="@+id/timeText"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"

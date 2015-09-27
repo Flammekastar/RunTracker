@@ -45,6 +45,7 @@ public class MapsActivity extends FragmentActivity implements View.OnClickListen
     Handler handler;
     private Timer t;
     private int TimeCounter = 0;
+    private SQLiteHelper db;
 
     public MapsActivity() {
         handler = new Handler();
@@ -56,7 +57,9 @@ public class MapsActivity extends FragmentActivity implements View.OnClickListen
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
         Button locationButton = (Button)findViewById(R.id.button);
+        Button stopButton = (Button)findViewById(R.id.button2);
         locationButton.setOnClickListener(this);
+        stopButton.setOnClickListener(this);
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         String lastLoc = settings.getString("lastLoc", "unknown");
         Float lastWeather = settings.getFloat("lastTemp",0);
@@ -82,6 +85,11 @@ public class MapsActivity extends FragmentActivity implements View.OnClickListen
                     0, //minste distanse som blir registrert
                     this);
             startTimer();
+        }
+        if (view.getId() == R.id.button2) {
+            db = new SQLiteHelper(this);
+            Run test = new Run(totaldistancemeters,TimeCounter);
+            db.addRun(test);
         }
     }
 
