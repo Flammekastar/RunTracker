@@ -27,6 +27,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 
 
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ public class MapsActivity extends FragmentActivity implements View.OnClickListen
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     private LocationManager locationManager;
     private ArrayList<LatLng> coordlist = new ArrayList<>();
+    private int totaldistancemeters;
     Handler handler;
 
     public MapsActivity() {
@@ -116,6 +118,9 @@ public class MapsActivity extends FragmentActivity implements View.OnClickListen
         }
         //Update the list of coords that has been recorded. Using the LatLng created earlier.
         updateRunCoords(curloc);
+        sumUpRun();
+        TextView test = (TextView)findViewById(R.id.distanceText);
+        test.setText(String.format("%.2f", sumUpRun() ) + "km");
     }
 
     @Override
@@ -192,5 +197,50 @@ public class MapsActivity extends FragmentActivity implements View.OnClickListen
                 }
             }
         }.start();
+    }
+
+    //Gets the total distance between all the coords the user has recorded.
+    private double sumUpRun() {
+        double lastlat = 0;
+        double lastlng = 0;
+        double lat = 0;
+        double lng = 0;
+        double distance = 0;
+        boolean first = true;
+        boolean firsttaken = false;
+        for (int a = 0; a < coordlist.size(); a++) {
+            if (first) {
+                lastlat = coordlist.get(a).latitude;
+                lastlng = coordlist.get(a).longitude;
+                firsttaken = true;
+            }
+            else {
+                lat = coordlist.get(a).latitude;
+                lng  = coordlist.get(a).longitude;
+                distance += distanceBetweenTwoLocationsInKm(lastlat,lastlng,lat,lng);
+                lastlat = lat;
+                lastlng = lng;
+            }
+            if(firsttaken) { first = false; }
+        }
+        double tempx = distance * 1000;
+        totaldistancemeters = (int) tempx;
+        return distance;
+    }
+
+    //Method to grab the distance between two locations based on long/lat and math wizardry.
+    public static Double distanceBetweenTwoLocationsInKm(Double latitudeOne, Double longitudeOne, Double latitudeTwo, Double longitudeTwo) {
+        if (latitudeOne == null || latitudeTwo == null || longitudeOne == null || longitudeTwo == null) {
+            return null;
+        }
+        Double earthRadius = 6371.0;
+        Double diffBetweenLatitudeRadians = Math.toRadians(latitudeTwo - latitudeOne);
+        Double diffBetweenLongitudeRadians = Math.toRadians(longitudeTwo - longitudeOne);
+        Double latitudeOneInRadians = Math.toRadians(latitudeOne);
+        Double latitudeTwoInRadians = Math.toRadians(latitudeTwo);
+        Double a = Math.sin(diffBetweenLatitudeRadians / 2) * Math.sin(diffBetweenLatitudeRadians / 2) + Math.cos(latitudeOneInRadians) * Math.cos(latitudeTwoInRadians) * Math.sin(diffBetweenLongitudeRadians / 2)
+                * Math.sin(diffBetweenLongitudeRadians / 2);
+        Double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return (earthRadius * c);
     }
 }
