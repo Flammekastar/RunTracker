@@ -105,11 +105,11 @@ public class MapsActivity extends FragmentActivity implements View.OnClickListen
         try {
             List<Address> test = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 2);
             TextView locText = (TextView)findViewById(R.id.textLocation);
-            locText.setText("You are currently located in " + test.get(0).getAddressLine(0).toString());
+            locText.setText("You are currently located in " + test.get(0).getAddressLine(0));
             SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
             SharedPreferences.Editor editor = settings.edit();
-            editor.putString("lastLoc", test.get(0).getAddressLine(0).toString());
-            editor.commit();
+            editor.putString("lastLoc", test.get(0).getAddressLine(0));
+            editor.apply();
             updateWeatherData(location.getLatitude(),location.getLongitude()); //EXPERIMENTAL
         } catch (IOException ioException) {
             Log.e("shits","wrong");
@@ -120,7 +120,7 @@ public class MapsActivity extends FragmentActivity implements View.OnClickListen
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
-        // TODO Auto-generated method stub
+
 
     }
 
@@ -137,7 +137,7 @@ public class MapsActivity extends FragmentActivity implements View.OnClickListen
                 Toast.LENGTH_SHORT).show();
     }
 
-    public void updateRunCoords(LatLng curloc) {;
+    public void updateRunCoords(LatLng curloc) {
         coordlist.add(curloc);
         mapMarkers();
     }
@@ -182,7 +182,7 @@ public class MapsActivity extends FragmentActivity implements View.OnClickListen
                                 SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
                                 SharedPreferences.Editor editor = settings.edit();
                                 editor.putFloat("lastTemp",(float)main.getDouble("temp"));
-                                editor.commit();
+                                editor.apply();
 
                             } catch(Exception e){
                                 Log.e("SimpleWeather", "One or more fields not found in the JSON data");
