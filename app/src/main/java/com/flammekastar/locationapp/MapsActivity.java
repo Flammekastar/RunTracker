@@ -10,9 +10,11 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Handler;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -35,7 +37,7 @@ import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MapsActivity extends FragmentActivity implements View.OnClickListener, LocationListener {
+public class MapsActivity extends AppCompatActivity implements View.OnClickListener, LocationListener {
 
     public static final String PREFS_NAME = "MyPrefsFile";
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
@@ -91,6 +93,13 @@ public class MapsActivity extends FragmentActivity implements View.OnClickListen
             Run test = new Run(totaldistancemeters,TimeCounter);
             db.addRun(test);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_activity_actions, menu);
+        return true;
     }
 
     private void setUpMapIfNeeded() {
