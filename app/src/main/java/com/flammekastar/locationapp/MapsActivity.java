@@ -120,7 +120,8 @@ public class MapsActivity extends FragmentActivity implements View.OnClickListen
         updateRunCoords(curloc);
         sumUpRun();
         TextView test = (TextView)findViewById(R.id.distanceText);
-        test.setText(String.format("%.2f", sumUpRun() ) + "km");
+        //test.setText(String.format("%.2f", sumUpRun() ) + "km");
+        test.setText(totaldistancemeters + "m");
     }
 
     @Override
