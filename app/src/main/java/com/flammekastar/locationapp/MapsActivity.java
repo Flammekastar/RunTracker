@@ -27,12 +27,13 @@ import com.google.android.gms.maps.model.PolylineOptions;
 
 
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MapsActivity extends FragmentActivity implements View.OnClickListener, LocationListener {
 
@@ -42,6 +43,8 @@ public class MapsActivity extends FragmentActivity implements View.OnClickListen
     private ArrayList<LatLng> coordlist = new ArrayList<>();
     private int totaldistancemeters;
     Handler handler;
+    private Timer t;
+    private int TimeCounter = 0;
 
     public MapsActivity() {
         handler = new Handler();
@@ -78,8 +81,7 @@ public class MapsActivity extends FragmentActivity implements View.OnClickListen
                     30000,   // 30 sec
                     0, //minste distanse som blir registrert
                     this);
-
-
+            startTimer();
         }
     }
 
@@ -204,8 +206,8 @@ public class MapsActivity extends FragmentActivity implements View.OnClickListen
     private double sumUpRun() {
         double lastlat = 0;
         double lastlng = 0;
-        double lat = 0;
-        double lng = 0;
+        double lat;
+        double lng;
         double distance = 0;
         boolean first = true;
         boolean firsttaken = false;
@@ -227,6 +229,24 @@ public class MapsActivity extends FragmentActivity implements View.OnClickListen
         double tempx = distance * 1000;
         totaldistancemeters = (int) tempx;
         return distance;
+    }
+    public void startTimer() {
+        t = new Timer();
+        t.scheduleAtFixedRate(new TimerTask() {
+
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        TextView time = (TextView)findViewById(R.id.timeText);
+                        time.setText(String.valueOf(TimeCounter)); // you can set it to a textView to show it to the user to see the time passing while he is writing.
+                        TimeCounter++;
+                    }
+                });
+
+            }
+        }, 1000, 1000); // 1000 means start from 1 sec, and the second 1000 is do the loop each 1 sec.
     }
 
     //Method to grab the distance between two locations based on long/lat and math wizardry.

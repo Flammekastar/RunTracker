@@ -46,6 +46,14 @@
         android:id="@+id/distanceText"
         android:layout_below="@+id/weatherText"
         android:layout_centerHorizontal="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0sec"
+        android:textColor="@color/yellow2"
+        android:id="@+id/timeText"
+        android:layout_below="@+id/distanceText"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
