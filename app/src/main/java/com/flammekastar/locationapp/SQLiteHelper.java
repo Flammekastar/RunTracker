@@ -5,8 +5,12 @@ package com.flammekastar.locationapp;
  */
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class SQLiteHelper extends SQLiteOpenHelper {
 
@@ -64,5 +68,32 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         // 4. close
         db.close();
+    }
+
+    public List<Run> getAllBooks() {
+        List<Run> runs = new LinkedList<Run>();
+
+        // 1. build the query
+        String query = "SELECT  * FROM " + TABLE_RUNS;
+
+        // 2. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        // 3. go over each row, build book and add it to list
+        Run run = null;
+        if (cursor.moveToFirst()) {
+            do {
+                run = new Run();
+                run.setId(Integer.parseInt(cursor.getString(0)));
+                run.setDistance(Integer.parseInt(cursor.getString(1)));
+                run.setTime(Integer.parseInt(cursor.getString(2)));
+
+                // Add book to books
+                runs.add(run);
+            } while (cursor.moveToNext());
+        }
+        // return books
+        return runs;
     }
 }

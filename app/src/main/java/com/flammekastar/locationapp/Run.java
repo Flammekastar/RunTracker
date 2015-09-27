@@ -17,12 +17,19 @@ public class Run {
         distance = dist;
     }
 
+    public void setId(int i) {
+        id = i;
+    }
+
     public void setTime(int t) {
         time = t;
     }
 
     public void setDistance(int dist) {
         distance = dist;
+    }
+    public int getID() {
+        return id;
     }
 
     public int getTime() {
