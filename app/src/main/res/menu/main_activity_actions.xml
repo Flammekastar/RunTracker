@@ -2,7 +2,7 @@
     xmlns:yourapp="http://schemas.android.com/apk/res-auto" >
     <!-- Search, should appear as action button -->
     <item android:id="@+id/action_list"
-        android:icon="@drawable/ic_list_black_24dp"
+        android:icon="@drawable/ic_view_list_white_36dp"
         android:title="@string/list_string"
         yourapp:showAsAction="ifRoom"  />
 </menu>

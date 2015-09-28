@@ -9,9 +9,12 @@ import android.support.v4.content.Loader;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 /**
  * Created by Flammekastaren on 28/09/2015.
@@ -64,5 +67,10 @@ public class RunListActivity extends ListActivity
     public void onLoaderReset(Loader<Cursor> loader) {
         mAdapter.swapCursor(null);
 
+    }
+
+    protected void onListItemClick(ListView l, View v, int position, long id){
+        super.onListItemClick(l, v, position, id);
+        Toast.makeText(RunListActivity.this, position + " -- " + id, Toast.LENGTH_SHORT).show();
     }
 }
