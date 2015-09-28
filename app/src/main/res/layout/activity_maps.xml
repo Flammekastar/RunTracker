@@ -18,7 +18,6 @@
         android:text="Vis lokasjon"
         android:id="@+id/button"
         android:textColor="@color/darkgreen"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
     <TextView

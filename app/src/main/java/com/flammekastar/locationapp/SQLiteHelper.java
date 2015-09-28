@@ -20,7 +20,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "RunDB";
     private static final String TABLE_RUNS = "runs";
 
-    private static final String KEY_ID = "id";
+    private static final String KEY_ID = "_id";
     private static final String KEY_DISTANCE = "distance";
     private static final String KEY_TIME = "time";
 
@@ -34,7 +34,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         // SQL statement to create book table
         String CREATE_RUN_TABLE = "CREATE TABLE runs ( " +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "distance INTEGER, "+
                 "time INTEGER )";
 
@@ -70,7 +70,14 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public List<Run> getAllBooks() {
+    public Cursor getAllCursor() {
+        String query = "SELECT  * FROM " + TABLE_RUNS;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        return cursor;
+    }
+
+    public List<Run> getAllRuns() {
         List<Run> runs = new LinkedList<Run>();
 
         // 1. build the query
