@@ -21,6 +21,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static final String TABLE_RUNS = "runs";
 
     private static final String KEY_ID = "_id";
+    private static final String KEY_DATE ="date";
     private static final String KEY_DISTANCE = "distance";
     private static final String KEY_TIME = "time";
 
@@ -35,6 +36,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         // SQL statement to create book table
         String CREATE_RUN_TABLE = "CREATE TABLE runs ( " +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "date TEXT, " +
                 "distance INTEGER, "+
                 "time INTEGER )";
 
@@ -58,6 +60,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
+        values.put(KEY_DATE, run.getDate());
         values.put(KEY_DISTANCE, run.getDistance()); // get title
         values.put(KEY_TIME, run.getTime()); // get author
 
@@ -72,6 +75,13 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     public Cursor getAllCursor() {
         String query = "SELECT  * FROM " + TABLE_RUNS;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        return cursor;
+    }
+
+    public Cursor getListRequired() {
+        String query = "SELECT  date,distance,time FROM " + TABLE_RUNS;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         return cursor;

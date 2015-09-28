@@ -33,7 +33,9 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.Timer;
@@ -49,6 +51,7 @@ public class MapsActivity extends AppCompatActivity implements View.OnClickListe
     Handler handler;
     private Timer t;
     private int TimeCounter = 0;
+    private String strDate;
     private SQLiteHelper db;
 
     public MapsActivity() {
@@ -88,11 +91,14 @@ public class MapsActivity extends AppCompatActivity implements View.OnClickListe
                     30000,   // 30 sec
                     0, //minste distanse som blir registrert
                     this);
+            Calendar c = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");  //YYYY-MM-DD HH:MM
+            strDate = sdf.format(c.getTime());
             startTimer();
         }
         if (view.getId() == R.id.button2) {
             db = new SQLiteHelper(this);
-            Run test = new Run(totaldistancemeters,TimeCounter);
+            Run test = new Run(totaldistancemeters,TimeCounter,strDate);
             db.addRun(test);
         }
     }
@@ -248,12 +254,10 @@ public class MapsActivity extends AppCompatActivity implements View.OnClickListe
         double lng;
         double distance = 0;
         boolean first = true;
-        boolean firsttaken = false;
         for (int a = 0; a < coordlist.size(); a++) {
             if (first) {
                 lastlat = coordlist.get(a).latitude;
                 lastlng = coordlist.get(a).longitude;
-                firsttaken = true;
             }
             else {
                 lat = coordlist.get(a).latitude;
@@ -262,7 +266,6 @@ public class MapsActivity extends AppCompatActivity implements View.OnClickListe
                 lastlat = lat;
                 lastlng = lng;
             }
-            if(firsttaken) { first = false; }
         }
         double tempx = distance * 1000;
         totaldistancemeters = (int) tempx;

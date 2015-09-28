@@ -4,10 +4,8 @@ import android.app.ListActivity;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SimpleCursorAdapter;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +21,6 @@ public class RunListActivity extends ListActivity
         implements LoaderManager.LoaderCallbacks<Cursor> {
 
     SimpleCursorAdapter mAdapter;
-    private SQLiteHelper db;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,11 +35,11 @@ public class RunListActivity extends ListActivity
         // Must add the progress bar to the root of the layout
         ViewGroup root = (ViewGroup) findViewById(android.R.id.content);
         root.addView(progressBar);
-
+        SQLiteHelper db;
         db = new SQLiteHelper(this);
         Cursor runData = db.getAllCursor();
 
-        String[] fromColumns = {"_id","distance","time"};
+        String[] fromColumns = {"date","distance","time"};
         int[] toViews = {R.id.Itemname,R.id.Itemname2,R.id.Itemname3}; // The TextView in simple_list_item_1
 
         mAdapter = new SimpleCursorAdapter(this,

@@ -8,13 +8,15 @@ public class Run {
     private int id;
     private int time;
     private int distance;
+    private String date;
 
     public Run() {}
 
-    public Run(int dist, int t) {
+    public Run(int dist, int t, String d) {
         super();
         time = t;
         distance = dist;
+        date = d;
     }
 
     public void setId(int i) {
@@ -28,9 +30,10 @@ public class Run {
     public void setDistance(int dist) {
         distance = dist;
     }
-    public int getID() {
-        return id;
-    }
+
+    public void setDate(String d) { date = d; }
+
+    public int getID() { return id; }
 
     public int getTime() {
         return time;
@@ -39,4 +42,6 @@ public class Run {
     public int getDistance() {
         return distance;
     }
+
+    public String getDate() { return date; }
 }
