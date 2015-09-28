@@ -53,6 +53,7 @@ public class MapsActivity extends AppCompatActivity implements View.OnClickListe
     private int TimeCounter = 0;
     private String strDate;
     private SQLiteHelper db;
+    private boolean runStarted;
 
     public MapsActivity() {
         handler = new Handler();
@@ -64,9 +65,7 @@ public class MapsActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
         Button locationButton = (Button)findViewById(R.id.button);
-        Button stopButton = (Button)findViewById(R.id.button2);
         locationButton.setOnClickListener(this);
-        stopButton.setOnClickListener(this);
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         String lastLoc = settings.getString("lastLoc", "unknown");
         Float lastWeather = settings.getFloat("lastTemp",0);
@@ -74,7 +73,7 @@ public class MapsActivity extends AppCompatActivity implements View.OnClickListe
         locText.setText("Last time you were located in " + lastLoc);
         TextView weatherText = (TextView)findViewById(R.id.weatherText);
         weatherText.setText("The temperatur was " + lastWeather + " degrees Celcius.");
-
+        runStarted = false;
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
     }
@@ -87,19 +86,29 @@ public class MapsActivity extends AppCompatActivity implements View.OnClickListe
 
     public void onClick(View view) {
         if (view.getId() == R.id.button) {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                    30000,   // 30 sec
-                    0, //minste distanse som blir registrert
-                    this);
-            Calendar c = Calendar.getInstance();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");  //YYYY-MM-DD HH:MM
-            strDate = sdf.format(c.getTime());
-            startTimer();
-        }
-        if (view.getId() == R.id.button2) {
-            db = new SQLiteHelper(this);
-            Run test = new Run(totaldistancemeters,TimeCounter,strDate);
-            db.addRun(test);
+            if (!runStarted) {
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                        10000,   // 30 sec
+                        0, //minste distanse som blir registrert
+                        this);
+                Calendar c = Calendar.getInstance();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");  //YYYY-MM-DD HH:MM
+                strDate = sdf.format(c.getTime());
+                startTimer();
+                runStarted = true;
+                Button start = (Button)findViewById(R.id.button);
+                start.setText("Stop run");
+            }
+            else {
+                t.cancel();
+                locationManager.removeUpdates(this);
+                db = new SQLiteHelper(this);
+                Run test = new Run(totaldistancemeters,TimeCounter,strDate);
+                db.addRun(test);
+                Button start = (Button)findViewById(R.id.button);
+                start.setText("Start run");
+                runStarted = false;
+            }
         }
     }
 
@@ -258,6 +267,7 @@ public class MapsActivity extends AppCompatActivity implements View.OnClickListe
             if (first) {
                 lastlat = coordlist.get(a).latitude;
                 lastlng = coordlist.get(a).longitude;
+                first = false;
             }
             else {
                 lat = coordlist.get(a).latitude;
