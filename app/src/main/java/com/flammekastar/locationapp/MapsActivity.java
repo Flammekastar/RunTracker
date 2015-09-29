@@ -72,7 +72,7 @@ public class MapsActivity extends AppCompatActivity implements View.OnClickListe
         TextView locText = (TextView)findViewById(R.id.textLocation);
         locText.setText(lastLoc);
         TextView weatherText = (TextView)findViewById(R.id.weatherText);
-        weatherText.setText(lastWeather + "" + R.string.celsius);
+        weatherText.setText(lastWeather + "" + getString(R.string.celsius));
         runStarted = false;
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
@@ -234,7 +234,7 @@ public class MapsActivity extends AppCompatActivity implements View.OnClickListe
                             try {
                             TextView weatherTxt =(TextView)findViewById(R.id.weatherText);
                                 JSONObject main = json.getJSONObject("main");
-                            weatherTxt.setText(String.format("%.2f", main.getDouble("temp"))+ R.string.celsius);
+                            weatherTxt.setText(String.format("%.2f", main.getDouble("temp"))+ getString(R.string.celsius));
                                 SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
                                 SharedPreferences.Editor editor = settings.edit();
                                 editor.putFloat("lastTemp",(float)main.getDouble("temp"));
