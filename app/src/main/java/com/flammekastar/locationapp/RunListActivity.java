@@ -28,7 +28,7 @@ import android.widget.Toast;
 public class RunListActivity extends ListActivity
         implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    SimpleCursorAdapter mAdapter;
+    private SimpleCursorAdapter mAdapter;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

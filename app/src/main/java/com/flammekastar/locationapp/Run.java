@@ -9,11 +9,11 @@ package com.flammekastar.locationapp;
  * @since   22-09-2015
  */
 
-public class Run {
+class Run {
 
-    private int time;
-    private int distance;
-    private String date;
+    private final int time;
+    private final int distance;
+    private final String date;
 
     public Run(int dist, int t, String d) {
         super();

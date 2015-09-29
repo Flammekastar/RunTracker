@@ -44,6 +44,7 @@
         android:textColor="@color/yellow2"
         android:textSize="20sp"
         android:paddingLeft="10dp"
+        android:paddingRight="1dp"
         android:id="@+id/textLocation" />
 
     <TextView
@@ -53,6 +54,7 @@
         android:textColor="@color/yellow2"
         android:textSize="20sp"
         android:paddingLeft="10dp"
+        android:paddingRight="1dp"
         android:id="@+id/weatherText"
         android:layout_below="@+id/textLocation" />
     <TextView
@@ -62,6 +64,7 @@
         android:textColor="@color/yellow2"
         android:textSize="20sp"
         android:paddingLeft="10dp"
+        android:paddingRight="1dp"
         android:id="@+id/distanceText"
         android:layout_below="@+id/weatherText" />
     <TextView
@@ -71,6 +74,7 @@
         android:textColor="@color/yellow2"
         android:textSize="20sp"
         android:paddingLeft="10dp"
+        android:paddingRight="1dp"
         android:id="@+id/timeText"
         android:layout_below="@+id/distanceText" />
 
@@ -84,7 +88,7 @@
         android:orientation="horizontal"
         android:background="@color/darkgreen">
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="horizontal"

@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="orange" type="color">#EF8336</item>
-    <item name="orange2" type="color">#f59276</item>
     <item name="yellow2" type="color">#FFDC00</item>
-    <item name="lightgreen" type="color">#00A48F</item>
     <item name="darkgreen" type="color">#003E3B</item>
-    <item name="white" type="color">#FFFFFF</item>
-    <item name="black" type="color">#000000</item>
 </resources>

@@ -17,6 +17,9 @@
     <string name="settings_string">Innstillinger</string>
     <string name="language_settings">Språkinnstillinger</string>
     <string name="languagepick">Velg ønsket språk.</string>
+    <string name="m">m</string>
+    <string name="seconds"> sekunder</string>
+    <string name="app_icon_description">Applikasjonens ikon</string>
 
     <string-array name="listentries">
         <item>Engelsk</item>

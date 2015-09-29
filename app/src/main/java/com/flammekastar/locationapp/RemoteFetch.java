@@ -13,7 +13,7 @@ import org.json.JSONObject;
 
 import android.content.Context;
 
-public class RemoteFetch {
+class RemoteFetch {
 
     private static final String OPEN_WEATHER_MAP_API =
             "http://api.openweathermap.org/data/2.5/weather?q=%s&units=metric";

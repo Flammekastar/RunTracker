@@ -44,12 +44,12 @@ import java.util.TimerTask;
 
 public class MapsActivity extends AppCompatActivity implements View.OnClickListener, LocationListener {
 
-    public static final String PREFS_NAME = "MyPrefsFile";
+    private static final String PREFS_NAME = "MyPrefsFile";
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     private LocationManager locationManager;
-    private ArrayList<LatLng> coordlist = new ArrayList<>();
+    private final ArrayList<LatLng> coordlist = new ArrayList<>();
     private int totaldistancemeters;
-    Handler handler;
+    private final Handler handler;
     private Timer t;
     private int TimeCounter = 0;
     private String strDate;
@@ -198,19 +198,19 @@ public class MapsActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.LENGTH_SHORT).show();
     }
 
-    public void updateRunCoords(LatLng curloc) {
+    private void updateRunCoords(LatLng curloc) {
         coordlist.add(curloc);
         mapMarkers();
     }
 
-    public void mapMarkers() {
+    private void mapMarkers() {
         mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
         for (int a = 0; a < coordlist.size(); a++) {
             mMap.addPolyline(new PolylineOptions().geodesic(true).addAll(coordlist).color(Color.rgb(0, 164, 143)));
         }
     }
 
-    public void setMapFragment(LatLng cLoc){
+    private void setMapFragment(LatLng cLoc){
         mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(cLoc, 17));
     }
@@ -251,7 +251,7 @@ public class MapsActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     //Gets the total distance between all the coords the user has recorded.
-    private double sumUpRun() {
+    private void sumUpRun() {
         double lastlat = 0;
         double lastlng = 0;
         double lat;
@@ -274,9 +274,8 @@ public class MapsActivity extends AppCompatActivity implements View.OnClickListe
         }
         double tempx = distance * 1000;
         totaldistancemeters = (int) tempx;
-        return distance;
     }
-    public void startTimer() {
+    private void startTimer() {
         t = new Timer();
         t.scheduleAtFixedRate(new TimerTask() {
 
@@ -295,7 +294,7 @@ public class MapsActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     //Method to grab the distance between two locations based on long/lat and math wizardry.
-    public static Double distanceBetweenTwoLocationsInKm(Double latitudeOne, Double longitudeOne, Double latitudeTwo, Double longitudeTwo) {
+    private static Double distanceBetweenTwoLocationsInKm(Double latitudeOne, Double longitudeOne, Double latitudeTwo, Double longitudeTwo) {
         if (latitudeOne == null || latitudeTwo == null || longitudeOne == null || longitudeTwo == null) {
             return null;
         }
