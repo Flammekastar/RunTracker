@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">RunTracker</string>
+    <string name="title_activity_maps">RunTracker</string>
+    <string name="open_weather_maps_app_id">b5f235b18dbf6592e351a809494864af</string>
+    <string name="place_not_found">Sted ikke funnet :(</string>
+    <string name="list_string">List</string>
+    <string name="start_run">Start</string>
+    <string name="stop_run">Stopp</string>
+    <string name="placeholder">Midlertidig</string>
+    <string name="welcome">Velkommen til RunTracker!</string>
+    <string name="instruction">Trykk start for å starte å løpe.</string>
+    <string name="zero_m">0m</string>
+    <string name="zero_sec">0sek</string>
+    <string name="celsius">Celsius</string>
+    <string name="enabled_gps">GPS er slått på.</string>
+    <string name="disabled_gps">GPS er slått av.</string>
+    <string name="settings_string">Innstillinger</string>
+    <string name="language_settings">Språkinnstillinger</string>
+    <string name="languagepick">Velg ønsket språk.</string>
+
+    <string-array name="listentries">
+        <item>Engelsk</item>
+        <item>Norsk</item>
+
+    </string-array>
+    <string-array name="listvalues">
+        <item>Engelsk</item>
+        <item>Norsk</item>
+
+    </string-array>
+</resources>
