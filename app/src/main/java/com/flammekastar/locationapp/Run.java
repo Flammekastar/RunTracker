@@ -1,11 +1,16 @@
 package com.flammekastar.locationapp;
 
 /**
- * Created by Flammekastaren on 27/09/2015.
+ * Run just to make an object out of Runs. This is not hugely important for the app in its current form,
+ * but could save me time down the line if I ever expand.
+ *
+ * @author  Alexander Maaby
+ * @version 1.0
+ * @since   22-09-2015
  */
+
 public class Run {
 
-    private int id;
     private int time;
     private int distance;
     private String date;
@@ -16,22 +21,6 @@ public class Run {
         distance = dist;
         date = d;
     }
-
-    public void setId(int i) {
-        id = i;
-    }
-
-    public void setTime(int t) {
-        time = t;
-    }
-
-    public void setDistance(int dist) {
-        distance = dist;
-    }
-
-    public void setDate(String d) { date = d; }
-
-    public int getID() { return id; }
 
     public int getTime() {
         return time;
