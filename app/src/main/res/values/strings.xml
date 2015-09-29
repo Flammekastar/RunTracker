@@ -14,4 +14,18 @@
     <string name="celsius">Celsius</string>
     <string name="enabled_gps">Enabled GPS provider</string>
     <string name="disabled_gps">Disabled GPS provider</string>
+    <string name="settings_string">Application settings</string>
+    <string name="language_settings">Language settings</string>
+    <string name="languagepick">Pick your prefered application language.</string>
+
+    <string-array name="listentries">
+        <item>English</item>
+        <item>Norwegian</item>
+
+    </string-array>
+    <string-array name="listvalues">
+        <item>English</item>
+        <item>Norwegian</item>
+
+    </string-array>
 </resources>

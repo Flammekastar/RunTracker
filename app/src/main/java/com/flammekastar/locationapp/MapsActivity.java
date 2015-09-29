@@ -128,6 +128,10 @@ public class MapsActivity extends AppCompatActivity implements View.OnClickListe
                 Intent listIntent = new Intent(this, RunListActivity.class);
                 this.startActivity(listIntent);
                 break;
+            case R.id.action_settings:
+                Intent settingsIntent = new Intent(this, SettingsActivity.class);
+                this.startActivity(settingsIntent);
+                break;
             default:
                 break;
         }

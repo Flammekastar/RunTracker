@@ -5,4 +5,8 @@
         android:icon="@drawable/ic_view_list_white_36dp"
         android:title="@string/list_string"
         yourapp:showAsAction="ifRoom"  />
+    <item android:id="@+id/action_settings"
+        android:icon="@drawable/ic_settings_white_36dp"
+        android:title="@string/settings_string"
+        yourapp:showAsAction="ifRoom"  />
 </menu>

@@ -39,6 +39,9 @@
             android:name="com.flammekastar.locationapp.RunListActivity"
             android:parentActivityName="com.flammekastar.locationapp.MapsActivity"
             android:theme="@android:style/Theme.Holo"/>
+        <activity
+            android:name="com.flammekastar.locationapp.SettingsActivity"
+            android:parentActivityName="com.flammekastar.locationapp.MapsActivity"/>
 
 
     </application>
