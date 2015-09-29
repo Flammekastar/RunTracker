@@ -22,7 +22,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start run"
+        android:text="@string/start_run"
         android:id="@+id/button"
         android:textColor="@color/darkgreen"
         android:layout_centerVertical="true"
@@ -40,36 +40,36 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Press the button to get location."
+        android:text="@string/welcome"
         android:textColor="@color/yellow2"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:paddingLeft="10dp"
         android:id="@+id/textLocation" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Something about weather"
+        android:text="@string/instruction"
         android:textColor="@color/yellow2"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:paddingLeft="10dp"
         android:id="@+id/weatherText"
         android:layout_below="@+id/textLocation" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0m"
+        android:text="@string/zero_m"
         android:textColor="@color/yellow2"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:paddingLeft="10dp"
         android:id="@+id/distanceText"
         android:layout_below="@+id/weatherText" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0sec"
+        android:text="@string/zero_sec"
         android:textColor="@color/yellow2"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:paddingLeft="10dp"
         android:id="@+id/timeText"
         android:layout_below="@+id/distanceText" />

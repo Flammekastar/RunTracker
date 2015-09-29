@@ -1,5 +1,6 @@
 package com.flammekastar.locationapp;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -52,7 +53,6 @@ public class MapsActivity extends AppCompatActivity implements View.OnClickListe
     private Timer t;
     private int TimeCounter = 0;
     private String strDate;
-    private SQLiteHelper db;
     private boolean runStarted;
 
     public MapsActivity() {
@@ -72,7 +72,7 @@ public class MapsActivity extends AppCompatActivity implements View.OnClickListe
         TextView locText = (TextView)findViewById(R.id.textLocation);
         locText.setText(lastLoc);
         TextView weatherText = (TextView)findViewById(R.id.weatherText);
-        weatherText.setText(lastWeather + " Celcius.");
+        weatherText.setText(lastWeather + "" + R.string.celsius);
         runStarted = false;
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
@@ -89,24 +89,25 @@ public class MapsActivity extends AppCompatActivity implements View.OnClickListe
             if (!runStarted) {
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                         10000,   // 30 sec
-                        0, //minste distanse som blir registrert
+                        0, //Lowest distance that will be recorded.
                         this);
                 Calendar c = Calendar.getInstance();
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");  //YYYY-MM-DD HH:MM
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");  //Suppressing this because I prefer to just use this formating for this purpose.
                 strDate = sdf.format(c.getTime());
                 startTimer();
                 runStarted = true;
                 Button start = (Button)findViewById(R.id.button);
-                start.setText("Stop run");
+                start.setText(R.string.stop_run);
             }
             else {
                 t.cancel();
                 locationManager.removeUpdates(this);
+                SQLiteHelper db;
                 db = new SQLiteHelper(this);
                 Run test = new Run(totaldistancemeters,TimeCounter,strDate);
                 db.addRun(test);
                 Button start = (Button)findViewById(R.id.button);
-                start.setText("Start run");
+                start.setText(R.string.start_run);
                 runStarted = false;
             }
         }
@@ -122,10 +123,8 @@ public class MapsActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            // action with ID action_refresh was selected
+            // action with ID action_list was selected, then start RunListActivity
             case R.id.action_list:
-                Toast.makeText(this, "Refresh selected", Toast.LENGTH_SHORT)
-                        .show();
                 Intent listIntent = new Intent(this, RunListActivity.class);
                 this.startActivity(listIntent);
                 break;
@@ -135,8 +134,6 @@ public class MapsActivity extends AppCompatActivity implements View.OnClickListe
 
         return true;
     }
-
-
 
     private void setUpMapIfNeeded() {
         // Do a null check to confirm that we have not already instantiated the map.
@@ -169,7 +166,7 @@ public class MapsActivity extends AppCompatActivity implements View.OnClickListe
             editor.apply();
             updateWeatherData(location.getLatitude(),location.getLongitude()); //EXPERIMENTAL
         } catch (IOException ioException) {
-
+            Log.e("IOException",":o");
         }
         //Update the list of coords that has been recorded. Using the LatLng created earlier.
         updateRunCoords(curloc);
@@ -187,14 +184,13 @@ public class MapsActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onProviderEnabled(String provider) {
-        Toast.makeText(this, "Enabled new provider " + provider,
+        Toast.makeText(this, R.string.enabled_gps + provider,
                 Toast.LENGTH_SHORT).show();
-
     }
 
     @Override
     public void onProviderDisabled(String provider) {
-        Toast.makeText(this, "Disabled provider " + provider,
+        Toast.makeText(this, R.string.disabled_gps + provider,
                 Toast.LENGTH_SHORT).show();
     }
 
@@ -213,11 +209,6 @@ public class MapsActivity extends AppCompatActivity implements View.OnClickListe
     public void setMapFragment(LatLng cLoc){
         mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(cLoc, 17));
-
-        //mMap.addMarker(new MarkerOptions()
-          //      .title("Location")
-            //    .snippet("You are here!")
-              //  .position(cLoc));
     }
 
     private void updateWeatherData(final double lat, final double lng){
@@ -239,7 +230,7 @@ public class MapsActivity extends AppCompatActivity implements View.OnClickListe
                             try {
                             TextView weatherTxt =(TextView)findViewById(R.id.weatherText);
                                 JSONObject main = json.getJSONObject("main");
-                            weatherTxt.setText(String.format("%.2f", main.getDouble("temp"))+ " Celcius.");
+                            weatherTxt.setText(String.format("%.2f", main.getDouble("temp"))+ R.string.celsius);
                                 SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
                                 SharedPreferences.Editor editor = settings.edit();
                                 editor.putFloat("lastTemp",(float)main.getDouble("temp"));
@@ -287,7 +278,6 @@ public class MapsActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void run() {
-                // TODO Auto-generated method stub
                 runOnUiThread(new Runnable() {
                     public void run() {
                         TextView time = (TextView)findViewById(R.id.timeText);

@@ -1,16 +1,17 @@
 package com.flammekastar.locationapp;
 
 /**
- * Created by Flammekastaren on 27/09/2015.
+ * This Activity gives the user a list of his/her runs recorded by the app.
+ *
+ * @author  Alexander Maaby
+ * @version 1.0
+ * @since   25-09-2015
  */
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import java.util.LinkedList;
-import java.util.List;
 
 public class SQLiteHelper extends SQLiteOpenHelper {
 
@@ -20,12 +21,12 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "RunDB";
     private static final String TABLE_RUNS = "runs";
 
-    private static final String KEY_ID = "_id";
+    //private static final String KEY_ID = "_id";
     private static final String KEY_DATE ="date";
     private static final String KEY_DISTANCE = "distance";
     private static final String KEY_TIME = "time";
 
-    private static final String[] COLUMNS = {KEY_ID,KEY_DISTANCE,KEY_TIME};
+    //private static final String[] COLUMNS = {KEY_ID,KEY_DISTANCE,KEY_TIME};
 
     public SQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -76,41 +77,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public Cursor getAllCursor() {
         String query = "SELECT  * FROM " + TABLE_RUNS;
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
-        return cursor;
+        return db.rawQuery(query, null);
     }
 
-    public Cursor getListRequired() {
-        String query = "SELECT  date,distance,time FROM " + TABLE_RUNS;
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
-        return cursor;
-    }
-
-    public List<Run> getAllRuns() {
-        List<Run> runs = new LinkedList<Run>();
-
-        // 1. build the query
-        String query = "SELECT  * FROM " + TABLE_RUNS;
-
-        // 2. get reference to writable DB
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
-
-        // 3. go over each row, build book and add it to list
-        Run run = null;
-        if (cursor.moveToFirst()) {
-            do {
-                run = new Run();
-                run.setId(Integer.parseInt(cursor.getString(0)));
-                run.setDistance(Integer.parseInt(cursor.getString(1)));
-                run.setTime(Integer.parseInt(cursor.getString(2)));
-
-                // Add book to books
-                runs.add(run);
-            } while (cursor.moveToNext());
-        }
-        // return books
-        return runs;
-    }
 }

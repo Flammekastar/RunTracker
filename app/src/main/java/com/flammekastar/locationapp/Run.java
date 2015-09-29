@@ -10,8 +10,6 @@ public class Run {
     private int distance;
     private String date;
 
-    public Run() {}
-
     public Run(int dist, int t, String d) {
         super();
         time = t;

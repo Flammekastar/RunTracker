@@ -19,7 +19,11 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 /**
- * Created by Flammekastaren on 28/09/2015.
+ * This Activity gives the user a list of his/her runs recorded by the app.
+ *
+ * @author  Alexander Maaby
+ * @version 1.0
+ * @since   26-09-2015
  */
 public class RunListActivity extends ListActivity
         implements LoaderManager.LoaderCallbacks<Cursor> {
