@@ -70,9 +70,9 @@ public class MapsActivity extends AppCompatActivity implements View.OnClickListe
         String lastLoc = settings.getString("lastLoc", "unknown");
         Float lastWeather = settings.getFloat("lastTemp",0);
         TextView locText = (TextView)findViewById(R.id.textLocation);
-        locText.setText("Last time you were located in " + lastLoc);
+        locText.setText(lastLoc);
         TextView weatherText = (TextView)findViewById(R.id.weatherText);
-        weatherText.setText("The temperatur was " + lastWeather + " degrees Celcius.");
+        weatherText.setText(lastWeather + " Celcius.");
         runStarted = false;
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
@@ -162,14 +162,14 @@ public class MapsActivity extends AppCompatActivity implements View.OnClickListe
         try {
             List<Address> test = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 2);
             TextView locText = (TextView)findViewById(R.id.textLocation);
-            locText.setText("You are currently located in " + test.get(0).getAddressLine(0));
+            locText.setText(test.get(0).getAddressLine(0));
             SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
             SharedPreferences.Editor editor = settings.edit();
             editor.putString("lastLoc", test.get(0).getAddressLine(0));
             editor.apply();
             updateWeatherData(location.getLatitude(),location.getLongitude()); //EXPERIMENTAL
         } catch (IOException ioException) {
-            Log.e("shits","wrong");
+
         }
         //Update the list of coords that has been recorded. Using the LatLng created earlier.
         updateRunCoords(curloc);
@@ -239,7 +239,7 @@ public class MapsActivity extends AppCompatActivity implements View.OnClickListe
                             try {
                             TextView weatherTxt =(TextView)findViewById(R.id.weatherText);
                                 JSONObject main = json.getJSONObject("main");
-                            weatherTxt.setText("It is " + String.format("%.2f", main.getDouble("temp"))+ " degrees Celcius.");
+                            weatherTxt.setText(String.format("%.2f", main.getDouble("temp"))+ " Celcius.");
                                 SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
                                 SharedPreferences.Editor editor = settings.edit();
                                 editor.putFloat("lastTemp",(float)main.getDouble("temp"));
