@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="horizontal" >
@@ -52,7 +53,8 @@
         android:textSize="20sp"
         android:paddingLeft="45dp"
         android:paddingRight="1dp"
-        android:paddingTop="5dp"/>
+        android:paddingTop="5dp"
+        tools:ignore="RtlHardcoded" />
     <TextView
         android:id="@+id/Itemname5"
         android:layout_width="wrap_content"
@@ -61,6 +63,7 @@
         android:layout_toRightOf="@+id/Itemname3"
         android:text="@string/seconds"
         android:textSize="20sp"
-        android:paddingTop="5dp"/>
+        android:paddingTop="5dp"
+        tools:ignore="RtlHardcoded" />
     </RelativeLayout>
 </LinearLayout>

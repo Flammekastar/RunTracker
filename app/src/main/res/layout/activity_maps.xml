@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Ignored the LINT warnings taht concerned this layout. Because it kept nagging me to use stuff
+  that was unavailable for my minimum API level. Meaning I would have to raise it, and that isn't ideal
+  since I am testing on a mobile that run at API level 16.-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -45,7 +48,8 @@
         android:textSize="20sp"
         android:paddingLeft="10dp"
         android:paddingRight="1dp"
-        android:id="@+id/textLocation" />
+        android:id="@+id/textLocation"
+        tools:ignore="RtlHardcoded" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -56,7 +60,8 @@
         android:paddingLeft="10dp"
         android:paddingRight="1dp"
         android:id="@+id/weatherText"
-        android:layout_below="@+id/textLocation" />
+        android:layout_below="@+id/textLocation"
+        tools:ignore="RtlHardcoded" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -66,7 +71,8 @@
         android:paddingLeft="10dp"
         android:paddingRight="1dp"
         android:id="@+id/distanceText"
-        android:layout_below="@+id/weatherText" />
+        android:layout_below="@+id/weatherText"
+        tools:ignore="RtlHardcoded" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -76,7 +82,8 @@
         android:paddingLeft="10dp"
         android:paddingRight="1dp"
         android:id="@+id/timeText"
-        android:layout_below="@+id/distanceText" />
+        android:layout_below="@+id/distanceText"
+        tools:ignore="RtlHardcoded" />
 
 </RelativeLayout>
     </LinearLayout>
