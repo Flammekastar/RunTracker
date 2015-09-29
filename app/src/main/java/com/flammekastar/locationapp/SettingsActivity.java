@@ -9,6 +9,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
+/**
+ * The activity to launch settings at the user. Only consists of language settings for now, but a
+ * good base for more in the future.
+ *
+ * @author  Alexander Maaby
+ * @version 1.0
+ * @since   29-09-2015
+ */
 
 public class SettingsActivity extends Activity implements OnClickListener {
 	

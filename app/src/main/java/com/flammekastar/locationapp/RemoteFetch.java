@@ -20,7 +20,7 @@ class RemoteFetch {
 
     public static JSONObject getJSON(Context context, double lat, double lng){
         try {
-            URL url = new URL(String.format(OPEN_WEATHER_MAP_API, "lat=",lat,"&lon=",lng));
+            URL url = new URL(String.format(OPEN_WEATHER_MAP_API,"lat=",lat,"&lon=",lng));
             HttpURLConnection connection =
                     (HttpURLConnection)url.openConnection();
 

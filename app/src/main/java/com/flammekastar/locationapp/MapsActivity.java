@@ -42,6 +42,15 @@ import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * This applications main activity. Contains the users ability to track runs. And the methods to save
+ * these to the database. Also contains the apps primary navigation within its actionbar.
+ *
+ * @author  Alexander Maaby
+ * @version 1.0
+ * @since   13-09-2015
+ */
+
 public class MapsActivity extends AppCompatActivity implements View.OnClickListener, LocationListener {
 
     private static final String PREFS_NAME = "MyPrefsFile";
@@ -138,6 +147,7 @@ public class MapsActivity extends AppCompatActivity implements View.OnClickListe
 
         return true;
     }
+
 
     private void setUpMapIfNeeded() {
         // Do a null check to confirm that we have not already instantiated the map.
